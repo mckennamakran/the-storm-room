@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Storm Room - Visual Anxiety Regulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-cloud-rain"></i>
+                <span>The Storm Room</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Storm Room</a></li>
+                <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="exercises.html" class="nav-link"><i class="fas fa-spa"></i> Exercises</a></li>
+                <li><a href="resources.html" class="nav-link"><i class="fas fa-hands-helping"></i> Resources</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container storm-page-container">
+        <!-- Storm Visualization -->
+        <div class="storm-container">
+            <div class="sky">
+                <div class="clouds"></div>
+                <div class="rain"></div>
+                <div class="lightning-container"></div>
+                <div class="sun"></div>
+                <div class="rainbow"></div>
+            </div>
+            <div class="landscape">
+                <div class="ground"></div>
+                <div class="tree"></div>
+                <div class="house"></div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="page-header">
+                <h1><i class="fas fa-cloud-rain"></i> The Storm Room</h1>
+                <p class="subtitle">Visual Anxiety Regulator</p>
+                <p class="description">You're in a storm. The weather reflects your anxiety. Use the tools below to calm the storm.</p>
+            </div>
+
+            <!-- Anxiety Intensity Slider -->
+            <div class="control-section">
+                <h2><i class="fas fa-sliders-h"></i> Storm Intensity</h2>
+                <p class="instruction">How intense does your anxiety feel right now?</p>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span>Calm</span>
+                        <span>Moderate</span>
+                        <span>Intense</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="60" class="intensity-slider" id="intensitySlider">
+                    <div class="slider-value">
+                        <span id="intensityValue">60</span>%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breathing Exercise -->
+            <div class="control-section">
+                <h2><i class="fas fa-lungs"></i> Calm Your Breathing</h2>
+                <p class="instruction">Choose a breathing technique and follow the circle rhythm.</p>
+                <div class="breathing-exercise">
+                    <div class="breathing-technique-buttons">
+                        <button class="breath-technique-btn active" data-technique="belly" data-inhale="4" data-hold="0" data-exhale="6">
+                            <i class="fas fa-hand-point-down"></i> Belly Breathing
+                            <span class="technique-pattern">(4-0-6)</span>
+                        </button>
+                        <button class="breath-technique-btn" data-technique="box" data-inhale="4" data-hold="4" data-exhale="4">
+                            <i class="fas fa-square"></i> Box Breathing
+                            <span class="technique-pattern">(4-4-4)</span>
+                        </button>
+                        <button class="breath-technique-btn" data-technique="fourSevenEight" data-inhale="4" data-hold="7" data-exhale="8">
+                            <i class="fas fa-wind"></i> 4-7-8 Breathing
+                            <span class="technique-pattern">(4-7-8)</span>
+                        </button>
+                    </div>
+                    
+                    <div class="breathing-visual">
+                        <div class="breathing-circle">
+                            <div class="breathing-text-container">
+                                <div class="breathing-text" id="breathingText">Ready</div>
+                                <div class="breathing-count" id="breathingCount">4s</div>
+                            </div>
+                            <div class="circle"></div>
+                            <div class="circle-border"></div>
+                        </div>
+                        
+                        <div class="breathing-cycle-display">
+                            <div class="cycle-indicators">
+                                <div class="cycle-indicator inhale-indicator" id="inhaleIndicator">
+                                    <div class="indicator-label">Inhale</div>
+                                    <div class="indicator-time" id="inhaleTime">4s</div>
+                                </div>
+                                <div class="cycle-indicator hold-indicator" id="holdIndicator">
+                                    <div class="indicator-label">Hold</div>
+                                    <div class="indicator-time" id="holdTime">0s</div>
+                                </div>
+                                <div class="cycle-indicator exhale-indicator" id="exhaleIndicator">
+                                    <div class="indicator-label">Exhale</div>
+                                    <div class="indicator-time" id="exhaleTime">6s</div>
+                                </div>
+                            </div>
+                            <div class="cycle-progress">
+                                <div class="cycle-fill" id="cycleFill"></div>
+                                <div class="phase-separator" id="inhaleSeparator"></div>
+                                <div class="phase-separator" id="holdSeparator"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="breathing-controls">
+                        <button id="startBreathing" class="btn breathing-btn">
+                            <i class="fas fa-play"></i> Start Breathing
+                        </button>
+                        <button id="stopBreathing" class="btn breathing-btn btn-secondary" disabled>
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                    </div>
+                    
+                    <div class="breathing-instruction" id="breathingInstruction">
+                        Select a breathing technique and click Start to begin
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reset Button -->
+            <div class="control-section">
+                <button id="resetBtn" class="btn reset-btn">
+                    <i class="fas fa-redo"></i> Reset Storm
+                </button>
+                <div class="tips">
+                    <h3><i class="fas fa-heart"></i> Remember:</h3>
+                    <p>You are not the storm. You are experiencing it. Storms always pass.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>The Storm Room</h3>
+                <p>A visual tool for anxiety regulation using storm metaphor.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Storm Room</a></li>
+                    <li><a href="about.html">About Concept</a></li>
+                    <li><a href="exercises.html">Grounding Exercises</a></li>
+                    <li><a href="resources.html">Help Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Important Notice</h3>
+                <p>This tool is not a substitute for professional mental health care. If you're in crisis, please seek immediate help.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 The Storm Room. All rights reserved. | Created for therapeutic purposes</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
